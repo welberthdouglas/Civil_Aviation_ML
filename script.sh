@@ -1,3 +1,4 @@
+python3 script.py
 datasets=ANAC_DATA/basica*.txt
 set -- $datasets
 head -n 1 $1 > tmp1.txt
