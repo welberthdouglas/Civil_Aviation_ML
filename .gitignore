@@ -2,8 +2,15 @@
 
 ANAC_DATA/
 ANAC_DATA_ZIP/
+data.csv
 
 # virtual environment
 
 venv-civil-av/
 
+# bibliografy
+
+Bibliografy/
+
+# pycache
+__pycache__/
