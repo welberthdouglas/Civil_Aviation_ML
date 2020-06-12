@@ -16,7 +16,7 @@ def yearmonthlist(dates:tuple):
         ymlist.append(datetime(y, m+1, 1).strftime("%Y-%m"))
     return ymlist
 
-def datadown(aggtype:str = 'basica', period:tuple = ('2016-01','2020-02')):
+def download_data( period:tuple = ('2016-01','2020-06')):
     """ Download the data from the ANAC website """
 
     r = requests.get('https://www.anac.gov.br/assuntos/setor-regulado/empresas/envio-de-informacoes/microdados')
@@ -24,8 +24,7 @@ def datadown(aggtype:str = 'basica', period:tuple = ('2016-01','2020-02')):
 
     monthlist = yearmonthlist(period)
 
-    links = [i.get('href') for i in soup.find_all('a') if aggtype in str(i.get('href'))]
-    
+    links = {i.get('href') for i in soup.find_all('a') if 'basica' in str(i.get('href'))}
     links_set = {x for x in links if any(y in x for y in monthlist)}
 
     directory = 'ANAC_DATA'
@@ -115,8 +114,8 @@ def dataprep(keep_cols:str = ['id_basica',
 
     print('data.csv file created successfully')
 
-def getdata():
-    datadown()
+def getdata(period:tuple = ('2016-01','2020-06')):
+    download_data(period)
     dataprep()
 
 if __name__=='__main__':
